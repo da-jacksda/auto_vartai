@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1>Geo location</h1>
+    <div id = "pos-div"></div>
+</body>
+
+<script>
+
+    if(!navigator.geolocation)
+    {
+        throw new Error("No geolocation available.");
+    }
+    function success(pos)
+    {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        document.getElementById("pos-div").innerHTML = lat + " " + lng;
+        console.log(pos);
+    }
+
+    function error(err)
+    {
+        if(err.code == 1)
+        {
+            alert("Please allow access to geolocation");
+        } else
+        {
+            alert("Position unavailable");
+        }
+    }
+
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+    };
+
+    navigator.geolocation.watchPosition(success, error, options);      
+
+</script>
+
+</html>
